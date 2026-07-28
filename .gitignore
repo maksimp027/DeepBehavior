@@ -1,0 +1,51 @@
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Python cache & build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Data & Model Artifacts (Medallion layers & trained weights)
+data/raw/*.csv
+data/interim/*.parquet
+data/processed/*.npz
+data/processed/*.parquet
+data/processed/*.csv
+models/*.h5
+models/*.keras
+models/*.pkl
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Testing & logs
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+.env

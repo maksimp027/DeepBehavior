@@ -1,0 +1,57 @@
+paths:
+  raw_dir: "data/raw"
+  interim_parquet: "data/interim/transactions.parquet"
+  processed_dir: "data/processed"
+  sequences_file: "data/processed/sequences.npz"
+  metadata_file: "data/processed/metadata.json"
+  models_dir: "models"
+  encoder_path: "models/encoder.h5"
+  autoencoder_path: "models/autoencoder.h5"
+  history_path: "models/training_history.json"
+  clusters_parquet_path: "data/processed/user_clusters.parquet"
+  clusters_csv_path: "data/processed/user_clusters.csv"
+  embeddings_path: "data/processed/user_embeddings.npz"
+  cluster_summary_path: "models/cluster_summary.json"
+
+data:
+  target_order_status: "delivered"
+  unknown_category_label: "unknown"
+  min_transactions: 2
+  max_len: 10
+  padding: "post"
+
+model:
+  seq_len: 10
+  vocab_size: 72
+  embedding_dim: 16
+  latent_dim: 16
+  encoder_filters:
+    - 32
+    - 64
+  decoder_filters: 32
+  kernel_size: 3
+  learning_rate: 0.001
+  mcc_loss_weight: 1.0
+  num_loss_weight: 1.0
+
+train:
+  validation_split: 0.2
+  random_seed: 42
+  batch_size: 64
+  epochs: 30
+  early_stopping_patience: 5
+  early_stopping_min_delta: 0.0005
+  reduce_lr_patience: 3
+  reduce_lr_factor: 0.5
+  min_lr: 0.00001
+  verbose: 1
+
+cluster:
+  algorithm: "kmeans"
+  n_clusters: 5
+  random_seed: 42
+  normalize_embeddings: true
+  kmeans_n_init: 10
+  kmeans_max_iter: 300
+  dbscan_eps: 0.65
+  dbscan_min_samples: 15
