@@ -1,0 +1,48 @@
+services:
+  extract:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: deepbehavior:latest
+    container_name: deepbehavior-extract
+    command: ["python", "-m", "src.data.extract"]
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+      - ./data:/app/data
+      - ./models:/app/models
+
+  build-features:
+    image: deepbehavior:latest
+    container_name: deepbehavior-features
+    command: ["python", "-m", "src.data.build_features"]
+    depends_on:
+      extract:
+        condition: service_completed_successfully
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+      - ./data:/app/data
+      - ./models:/app/models
+
+  train:
+    image: deepbehavior:latest
+    container_name: deepbehavior-train
+    command: ["python", "-m", "src.models.train"]
+    depends_on:
+      build-features:
+        condition: service_completed_successfully
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+      - ./data:/app/data
+      - ./models:/app/models
+
+  cluster:
+    image: deepbehavior:latest
+    container_name: deepbehavior-cluster
+    command: ["python", "-m", "src.recsys.cluster"]
+    depends_on:
+      train:
+        condition: service_completed_successfully
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+      - ./data:/app/data
+      - ./models:/app/models

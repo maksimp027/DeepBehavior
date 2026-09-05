@@ -1,0 +1,14 @@
+venv/
+.venv/
+.git/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.vscode/
+.idea/
+data/interim/
+data/processed/*.npz
+data/processed/*.parquet
+data/processed/*.csv
+models/*.h5
+models/*.keras
