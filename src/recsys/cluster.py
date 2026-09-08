@@ -248,3 +248,27 @@ def main() -> None:
         type=str,
         default=None,
         help="Path to configuration YAML file",
+    )
+    parser.add_argument(
+        "--algorithm",
+        type=str,
+        default=None,
+        choices=["kmeans", "dbscan"],
+        help="Override clustering algorithm from config",
+    )
+    parser.add_argument(
+        "--n-clusters",
+        type=int,
+        default=None,
+        help="Override number of clusters for KMeans",
+    )
+    args = parser.parse_args()
+    run_clustering(
+        config_path=args.config,
+        algorithm_override=args.algorithm,
+        n_clusters_override=args.n_clusters,
+    )
+
+
+if __name__ == "__main__":
+    main()
