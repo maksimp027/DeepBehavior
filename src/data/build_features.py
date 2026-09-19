@@ -89,6 +89,7 @@ def build_sequential_features(
     time_seqs = np.zeros((n_users, seq_max_len), dtype=np.float32)
     user_ids = np.empty(n_users, dtype="U32")
 
+    # Truncate sequences to the terminal seq_max_len interactions and zero-pad shorter histories.
     for i, (u_id, group) in enumerate(grouped):
         user_ids[i] = u_id
 
