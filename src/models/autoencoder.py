@@ -130,3 +130,10 @@ def build_1d_cnn_autoencoder(
         },
     )
 
+    return encoder_model, autoencoder_model
+
+
+if __name__ == "__main__":
+    encoder, autoencoder = build_1d_cnn_autoencoder()
+    encoder.summary()
+    autoencoder.summary()
