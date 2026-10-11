@@ -168,3 +168,16 @@ def train_model(config_path: Path | str | None = None) -> dict[str, list[float]]
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Train the 1D-CNN Autoencoder and save Encoder weights"
+    )
+    parser.add_argument(
+        "--config",
+        type=str,
+        default=None,
+        help="Path to configuration YAML file",
+    )
+    args = parser.parse_args()
+    train_model(config_path=args.config)
+
+
+if __name__ == "__main__":
+    main()
